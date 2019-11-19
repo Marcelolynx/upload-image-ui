@@ -17,6 +17,21 @@ class App extends Component {
     uploadedFiles: [],
   };
 
+  async componentDidMount() {
+    const response = await api.get('posts');
+
+    this.setState({
+    uploadedFiles: response.data.map(file => ({
+      id: file._id,
+      name: file.name,
+      readableSize: filesize(file.size),
+      preview: file.url,
+      uploaded: true,
+      url: file.url,
+
+    }))
+    })
+  }
 
   handleUpload = files => {
     const uploadedFiles = files.map(file => ({
@@ -53,7 +68,7 @@ class App extends Component {
 
     data.append('file', uploadedFile.file, uploadedFile.name);
 
-    api.post('/posts', data, {
+    api.post('posts', data, {
       onUploadProgress: e => {
         const progress = parseInt(Math.round((e.loaded * 100) / e.total));
 
@@ -74,6 +89,18 @@ class App extends Component {
     });  
   };
 
+  handleDelete  = async id => {
+    await api.delete(`posts/${id}`);
+
+    this.setState({
+      uploadedFiles: this.state.uploadedFiles.filter(file => file.id !== id),
+    })
+  }
+
+  /* Limpa o Cache com as previews das imagens de upload */
+  componentWillUnmount() {
+    this.state.uploadedFiles.forEach(file => URL.revokeObjectURL(file.preview));
+  }
 
   render() {
     const { uploadedFiles } = this.state;
@@ -82,7 +109,8 @@ class App extends Component {
             <Content>
               <Upload onUpload={this.handleUpload} />  
               { !!uploadedFiles.length && (
-                <FileList files={uploadedFiles} />
+                <FileList files={uploadedFiles}
+                          onDelete={this.handleDelete} />
               )}
             </Content>
             <GlobalStyle />
