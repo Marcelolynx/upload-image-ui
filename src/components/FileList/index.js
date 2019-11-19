@@ -11,7 +11,7 @@ const FileList = () => (
   <Container>
     <li>
       <FileInfo>
-        <Preview src="https://kluster-upload.s3.amazonaws.com/c8fe56b6f14d3c34a4538717c843a519-mandrills" />
+        <Preview src="https://kluster-upload.s3.amazonaws.com/686f680274e4c1d73a6ee84316546fc0-lions.jpg" />
         <div>
           <strong>profile.png</strong>
           <span>64kb <button onClick={() => {}}>Excluir</button></span>
@@ -28,7 +28,7 @@ const FileList = () => (
           percentage={60}
           />
 
-          <a href="https://kluster-upload.s3.amazonaws.com/c8fe56b6f14d3c34a4538717c843a519-mandrills"
+          <a href="https://kluster-upload.s3.amazonaws.com/686f680274e4c1d73a6ee84316546fc0-lions.jpg"
               target="_blank"
               rel="noopener noreferrer"
               >
