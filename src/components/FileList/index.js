@@ -1,5 +1,6 @@
 import React from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import { MdCheckCircle, MdError, MdLink } from 'react-icons/md';
 import { Container, FileInfo, Preview } from './styles';
 
